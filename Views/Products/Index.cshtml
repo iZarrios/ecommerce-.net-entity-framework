@@ -1,0 +1,70 @@
+﻿@model IEnumerable<electronics_shop_mvc_1.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if(ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+    string password = "kF%@6dsWpNGGsr";
+}
+<h1>@password</h1>
+<h2> List of Products</h2>
+<div class="container">
+    <div class="row g-3">
+        @foreach(var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card border-4" style="width: 18rem;">
+                    <img src="uploads/@item.ProductImage" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Name @item.Name</h5>
+                       @* <p class="card-text">DESC:  @item.Description </p>*@
+                       <p class="card-text">Category Name:  @item.Category.Name</p>
+                       
+                       @if (User.Identity.IsAuthenticated)
+                       {
+                           <p class="card-text">Price: @((item.Price- (item.Price *(item.RegistrationDiscount/100)))) </p>
+                       }
+                       else
+                       {
+                           
+                           
+                           <p class="card-text">nPrice: @item.Price </p>
+                       }
+                        <p class="card-text">Quantity:  @item.Quantity </p>
+                        <p class="card-text">RegisDis:  @item.RegistrationDiscount </p>
+                       <p class="card-text">MultiDis:  @item.MultiUnitDiscount </p>
+                       @if (User.Identity.IsAuthenticated)
+                       {
+                           <div style="position: relative;bottom: 10px;left: 70%;" class="justify-content-end">
+                               <a href="/Products/Buy/@item.ProductId" class="btn btn-primary">Order</a>
+                           </div>
+                       }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="container p-4">
+    @if (pager.TotalPages > 0)
+    {
+    <ul class="pagination justify-content-center">
+        @for (var pge = pager.StartPage;pge <= pager.EndPage;pge++)
+            {
+                <li class="page-item @(pge == pager.CurrentPage? "active":"")" >
+                    <a class="page-link" asp-controller="Products" asp-action="Index" asp-route-pg = "@pge"> @pge </a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+

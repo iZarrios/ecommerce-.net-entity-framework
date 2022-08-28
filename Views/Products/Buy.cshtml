@@ -1,0 +1,45 @@
+﻿@model electronics_shop_mvc_1.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<h1>Buy</h1>
+
+<h4>Product</h4>
+<hr />
+
+@Model.UserId
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Buy">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            @* <div class="hidden form-group"> *@
+            @*     <label asp-for="TotalPrice" class="control-label"></label> *@
+            @*     <input asp-for="TotalPrice"  class="form-control" /> *@
+            @*     <span asp-validation-for="TotalPrice" class="text-danger"></span> *@
+            @* </div> *@
+            <div class="form-group">
+                <input type="submit" value="Buy" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Configure">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

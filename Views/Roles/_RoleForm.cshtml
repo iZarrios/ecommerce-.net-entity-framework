@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model electronics_shop_mvc_1.ViewModels.RoleFormViewModel
+
+<form method="post" asp-action="Add">
+    <div class="input-group mb-3">
+        <input asp-for="Name" class="form-control" placeholder="Role name..." />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Add New Role</button>
+        </div>
+    </div>
+    <span asp-validation-for="Name" class="text-danger"></span>
+</form>
