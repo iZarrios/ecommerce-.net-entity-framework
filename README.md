@@ -5,5 +5,5 @@ Link Development Summer 2022 Internship Workshop
 - MVC .Net 6
 - Angular integration
 
-# Disclaimer
+## Disclaimer
 my .git folder got deleted by a mistake so the commits history is wiped.
